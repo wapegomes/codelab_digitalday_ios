@@ -1,0 +1,10 @@
+use_frameworks!
+platform :ios, '9.0'
+
+pod 'GoogleSignIn'
+pod 'Firebase/Storage'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+
+target 'Friendly Chat' do
+end
