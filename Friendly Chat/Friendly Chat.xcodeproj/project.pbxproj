@@ -16,6 +16,8 @@
 		7BCC247D1D7A20A3005C7F71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BCC247C1D7A20A3005C7F71 /* GoogleService-Info.plist */; };
 		7BCC247F1D7A239F005C7F71 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC247E1D7A239F005C7F71 /* LoginViewController.swift */; };
 		7BCC24851D7A31BA005C7F71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC24841D7A31BA005C7F71 /* Constants.swift */; };
+		7BCC24871D7A4011005C7F71 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC24861D7A4011005C7F71 /* Message.swift */; };
+		7BCC24891D7B089B005C7F71 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC24881D7B089B005C7F71 /* MessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		7BCC247E1D7A239F005C7F71 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7BCC24801D7A2900005C7F71 /* Friendly Chat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Friendly Chat-Bridging-Header.h"; sourceTree = "<group>"; };
 		7BCC24841D7A31BA005C7F71 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7BCC24861D7A4011005C7F71 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7BCC24881D7B089B005C7F71 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		AF7289291D92C0527B68BDD2 /* Pods-Friendly Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friendly Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Friendly Chat/Pods-Friendly Chat.release.xcconfig"; sourceTree = "<group>"; };
 		B57831F514F7DB5E83C424D5 /* Pods-Friendly Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Friendly Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Friendly Chat/Pods-Friendly Chat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +99,8 @@
 				7BCC247C1D7A20A3005C7F71 /* GoogleService-Info.plist */,
 				7BCC24801D7A2900005C7F71 /* Friendly Chat-Bridging-Header.h */,
 				7BCC24841D7A31BA005C7F71 /* Constants.swift */,
+				7BCC24861D7A4011005C7F71 /* Message.swift */,
+				7BCC24881D7B089B005C7F71 /* MessageCell.swift */,
 			);
 			path = "Friendly Chat";
 			sourceTree = "<group>";
@@ -225,8 +231,10 @@
 			files = (
 				7BCC247F1D7A239F005C7F71 /* LoginViewController.swift in Sources */,
 				7BCC246D1D7A1EDE005C7F71 /* ViewController.swift in Sources */,
+				7BCC24871D7A4011005C7F71 /* Message.swift in Sources */,
 				7BCC246B1D7A1EDE005C7F71 /* AppDelegate.swift in Sources */,
 				7BCC24851D7A31BA005C7F71 /* Constants.swift in Sources */,
+				7BCC24891D7B089B005C7F71 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
