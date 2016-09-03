@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 import Firebase
 
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        IQKeyboardManager.sharedManager().enable = true
+        
         FIRApp.configure()
 
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
