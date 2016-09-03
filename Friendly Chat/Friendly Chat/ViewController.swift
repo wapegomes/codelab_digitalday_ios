@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Photos
+
 import Kingfisher
 
 import Firebase
 
 // MARK: - Life Cycle
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -29,10 +31,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         }
     }
 
+    @IBOutlet weak var imageButton: UIButton!
+
+
     var user: FIRUser?
 
     var databaseHandle: FIRDatabaseHandle!
     var databaseReference: FIRDatabaseReference!
+
+    var storageReference: FIRStorageReference!
+
 
     var messages: [Message] = [] {
         didSet {
@@ -55,6 +63,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         }
 
         self.user = user
+
+        configureDatabase()
+        configureStorage()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -64,13 +75,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
             performSegueWithIdentifier(Constants.Segues.ShowLogin, sender: nil)
             return
         }
-
-        configureDatabase()
     }
 
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
 }
 
 // MARK: - Firebase
@@ -91,6 +97,9 @@ extension ViewController {
         })
     }
 
+    func configureStorage() {
+        storageReference = FIRStorage.storage().referenceForURL("gs://digitalday-aba51.appspot.com")
+    }
 }
 
 // MARK: - Actions
@@ -104,10 +113,8 @@ extension ViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell: MessageCell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageCell
-        //.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as! MessageCell
 
         let message: Message! = self.messages[indexPath.row]
-        print(message)
 
         let photoUrl = NSURL(string: message.avatar ?? "")
         cell.myImageView.kf_setImageWithURL(photoUrl, placeholderImage: UIImage(named: "Avatar"))
@@ -155,14 +162,14 @@ extension ViewController {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == inputField {
             textField.resignFirstResponder()
-            sendMessage(textField.text)
+            sendMessage(text: textField.text)
             textField.text = nil
             return false
         }
         return true
     }
 
-    func sendMessage(text: String?) {
+    func sendMessage(text text: String?) {
         let message = Message(
             name: user?.displayName ?? "anonymous",
             avatar: user?.photoURL?.absoluteString,
@@ -172,6 +179,77 @@ extension ViewController {
 
         self.databaseReference.child("messages").childByAutoId().setValue(message.toDictionary())
     }
+
+    func sendMessage(image image: String?) {
+        let message = Message(
+            name: user?.displayName ?? "anonymous",
+            avatar: user?.photoURL?.absoluteString,
+            type: "photo",
+            text: nil,
+            photo: image)
+
+        self.databaseReference.child("messages").childByAutoId().setValue(message.toDictionary())
+    }
+
+    @IBAction func openGallery(sender: AnyObject) {
+
+        let picker = UIImagePickerController()
+        picker.delegate = self
+
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            picker.sourceType = .Camera
+        } else {
+            picker.sourceType = .PhotoLibrary
+        }
+
+        presentViewController(picker, animated: true, completion:nil)
+    }
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion:nil)
+
+        if let referenceUrl = info[UIImagePickerControllerReferenceURL] {
+            let assets = PHAsset.fetchAssetsWithALAssetURLs([referenceUrl as! NSURL], options: nil)
+
+            let asset = assets.firstObject
+            asset?.requestContentEditingInputWithOptions(nil, completionHandler: { (contentEditingInput, info) in
+                let imageFile = contentEditingInput?.fullSizeImageURL
+                let filePath = "\(FIRAuth.auth()?.currentUser?.uid)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(referenceUrl.lastPathComponent!)"
+                self.storageReference.child(filePath)
+                    .putFile(imageFile!, metadata: nil) { (metadata, error) in
+                        if let error = error {
+                            print("Error uploading: \(error.description)")
+                            return
+                        }
+
+                        let url = metadata?.downloadURL()?.absoluteString
+                        self.sendMessage(image: url)
+                }
+            })
+        } else {
+            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            let imageData = UIImageJPEGRepresentation(image, 0.8)
+            let imagePath = FIRAuth.auth()!.currentUser!.uid +
+                "/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000)).jpg"
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            self.storageReference.child(imagePath)
+                .putData(imageData!, metadata: metadata) { (metadata, error) in
+                    if let error = error {
+                        print("Error uploading: \(error)")
+                        return
+                    }
+
+                    let url = metadata?.downloadURL()?.absoluteString
+                    self.sendMessage(image: url)
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion:nil)
+    }
+
 }
 
 

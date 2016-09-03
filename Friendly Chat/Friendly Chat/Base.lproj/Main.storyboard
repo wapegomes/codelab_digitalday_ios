@@ -34,15 +34,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="PAk-Ua-hmP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="PAk-Ua-hmP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="120" id="Wj7-GB-oRO" customClass="MessageCell" customModule="Friendly_Chat">
-                                        <rect key="frame" x="0.0" y="1" width="375" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="150" id="Wj7-GB-oRO" customClass="MessageCell" customModule="Friendly_Chat">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="Wj7-GB-oRO" id="732-q9-FMZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LWy-oz-xbe">
@@ -66,10 +66,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cAh-zJ-MiX">
-                                                    <rect key="frame" x="68" y="31" width="290" height="80"/>
+                                                    <rect key="frame" x="68" y="31" width="290" height="110"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="CqH-dL-L42"/>
+                                                        <constraint firstAttribute="height" constant="110" id="CqH-dL-L42"/>
                                                         <constraint firstAttribute="width" constant="290" id="tV5-vb-k5w"/>
                                                     </constraints>
                                                 </imageView>
@@ -100,17 +100,30 @@
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EFy-jw-fRL">
-                                        <rect key="frame" x="15" y="10" width="345" height="40"/>
+                                        <rect key="frame" x="15" y="10" width="300" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="send"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NY2-rY-IB7">
+                                        <rect key="frame" x="325" y="15" width="35" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="pJQ-Wc-Q5w"/>
+                                        </constraints>
+                                        <state key="normal" image="Gallery"/>
+                                        <connections>
+                                            <action selector="openGallery:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hhi-XZ-cAO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.775673750672073" green="0.75485214825511826" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="EFy-jw-fRL" secondAttribute="trailing" constant="15" id="2GI-Mo-ufT"/>
+                                    <constraint firstAttribute="trailing" secondItem="EFy-jw-fRL" secondAttribute="trailing" constant="60" id="2GI-Mo-ufT"/>
                                     <constraint firstItem="EFy-jw-fRL" firstAttribute="top" secondItem="qzV-1O-l0b" secondAttribute="top" constant="10" id="G7T-O0-Hhh"/>
                                     <constraint firstAttribute="height" constant="60" id="IuR-lT-S4Y"/>
                                     <constraint firstAttribute="bottom" secondItem="EFy-jw-fRL" secondAttribute="bottom" constant="10" id="N4V-5p-KA3"/>
+                                    <constraint firstItem="NY2-rY-IB7" firstAttribute="top" secondItem="qzV-1O-l0b" secondAttribute="top" constant="15" id="ORS-PQ-XaU"/>
+                                    <constraint firstAttribute="trailing" secondItem="NY2-rY-IB7" secondAttribute="trailing" constant="15" id="mEf-l9-TYh"/>
+                                    <constraint firstAttribute="bottom" secondItem="NY2-rY-IB7" secondAttribute="bottom" constant="15" id="mOh-Fb-yjr"/>
                                     <constraint firstItem="EFy-jw-fRL" firstAttribute="leading" secondItem="qzV-1O-l0b" secondAttribute="leading" constant="15" id="rZs-IC-cvg"/>
                                 </constraints>
                             </view>
@@ -135,6 +148,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="imageButton" destination="NY2-rY-IB7" id="8Kw-MF-6j7"/>
                         <outlet property="inputField" destination="EFy-jw-fRL" id="B66-jN-Shl"/>
                         <outlet property="tableView" destination="PAk-Ua-hmP" id="nn2-dZ-nfP"/>
                         <segue destination="4fd-3r-bQ7" kind="presentation" identifier="ShowLogin" id="KHm-aJ-oif"/>
@@ -187,6 +201,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Gallery" width="200" height="200"/>
         <image name="Logo" width="301" height="81"/>
     </resources>
 </document>
